@@ -1,10 +1,18 @@
-<!DOCTYPE html><html lang="vi">
+<!-- HTML COMMENT FORMAT: 
+    - Sửa chỗ nào, tìm class hoặc id tương ứng.
+    - Mỗi chỗ đều có mô tả để người không rành cũng hiểu.
+-->
+<!DOCTYPE html>
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LÂM PHÚ QUÝ</title>
+  <title>LÂM PHÚ QUÝ</title> <!-- Đổi tiêu đề trang tại đây -->
+  
+  <!-- Font icon và font chữ đẹp cho FPS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       margin: 0;
@@ -17,145 +25,181 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
-    }.fps-counter {
-  position: fixed;
-  top: 5px;
-  left: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: #00ffcc;
-  font-size: 14px;
-  z-index: 9999;
-  font-family: Orbitron;
-}
+    }
 
-.snow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 998;
-}
+    .fps-counter {
+      position: fixed;
+      top: 5px;
+      left: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 5px 10px;
+      border-radius: 5px;
+      color: #00ffcc;
+      font-size: 14px;
+      z-index: 9999;
+      font-family: Orbitron; /* Font số FPS */
+    }
 
-.snowflake {
-  position: absolute;
-  top: -10px;
-  color: white;
-  font-size: 10px;
-  animation: fall linear infinite;
-}
+    /* Tuyết rơi nền */
+    .snow { 
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 998;
+    }
 
-@keyframes fall {
-  to {
-    transform: translateY(100vh);
-    opacity: 0;
-  }
-}
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      color: white;
+      font-size: 10px;
+      animation: fall linear infinite;
+    }
 
-.container {
-  max-width: 400px;
-  width: 100%;
-  padding: 20px;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
 
-.avatar {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  border: 4px solid transparent;
-  background-image: linear-gradient(black, black), 
-                    linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-  box-shadow: 0 0 20px lime;
-  animation: borderSpin 5s linear infinite;
-  margin-bottom: 15px;
-  object-fit: cover;
-  aspect-ratio: 1 / 1;
-}
+    .container {
+      max-width: 400px;
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
 
-@keyframes borderSpin {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
-}
+    .avatar {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 4px solid transparent;
+      background-image: linear-gradient(black, black), 
+      linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet); /* Viền 7 màu */
+      background-origin: border-box;
+      background-clip: content-box, border-box;
+      box-shadow: 0 0 20px lime;
+      animation: borderSpin 5s linear infinite;
+      margin-bottom: 15px;
+      object-fit: cover;
+      aspect-ratio: 1 / 1; /* Tỉ lệ hình vuông */
+    }
 
-h1 {
-  font-size: 22px;
-  margin: 10px 0;
-}
+    @keyframes borderSpin {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
 
-.verified {
-  color: #00f0ff;
-  margin-left: 5px;
-}
+    h1 {
+      font-size: 22px;
+      margin: 10px 0;
+    }
 
-.social-icons a {
-  font-size: 24px;
-  margin: 0 10px;
-  color: white;
-  text-decoration: none;
-}
+    .verified {
+      color: #00f0ff;
+      margin-left: 5px;
+    }
 
-.social-icons a:hover {
-  color: #00f0ff;
-}
-
-.info {
-  font-size: 14px;
-  margin: 20px 0;
-  line-height: 1.6;
-}
-
-.zalo {
-  color: #00f0ff;
-  text-decoration: none;
-}
-
-.timer {
-  color: red;
-  margin-top: 10px;
-}
-
-.music-btn {
+    /* Các icon MXH */
+    .button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
 }
 
-button {
-  background-color: #00f0ff;
+.button {
+  width: 220px;
+  background-color: rgba(255, 255, 255, 0.1);
   border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
   font-weight: bold;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
   cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
 }
 
-select {
-  margin-top: 10px;
-  padding: 8px;
-  border-radius: 5px;
+.button:hover {
+  background-color: #00f0ff;
+  color: black;
+  box-shadow: 0 0 10px #00f0ff;
 }
 
-@media screen and (max-width: 480px) {
-  .avatar {
-    width: 140px;
-    height: 140px;
-  }
-  h1 {
-    font-size: 18px;
-  }
+.grid-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
+
+.button i {
+  font-size: 18px;
+}
+    .info {
+      font-size: 14px;
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+
+    .zalo {
+      color: #00f0ff;
+      text-decoration: none;
+    }
+
+    .timer {
+      color: red;
+      margin-top: 10px;
+    }
+
+    .music-btn {
+      margin-top: 20px;
+    }
+
+    button {
+      background-color: #00f0ff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    select {
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 5px;
+    }
+
+    /* Responsive cho điện thoại */
+    @media screen and (max-width: 480px) {
+      .avatar {
+        width: 140px;
+        height: 140px;
+      }
+      h1 {
+        font-size: 18px;
+      }
+    }
 
   </style>
+
   <script>
     let currentSong = "";
+    
+    // Đồng hồ hiển thị thời gian tạo web
     function updateTimer() {
-      const createdAt = new Date("2025-04-21T00:00:00");
+      const createdAt = new Date("2025-04-21T00:00:00"); // Đổi ngày bắt đầu tại đây
       const now = new Date();
       const diff = Math.floor((now - createdAt) / 1000);
       const days = Math.floor(diff / (3600 * 24));
@@ -163,86 +207,120 @@ select {
       const minutes = Math.floor((diff % 3600) / 60);
       const seconds = diff % 60;
       document.getElementById("timer").innerText = `${days} day ${hours} hour ${minutes} minute ${seconds} second`;
-    }function changeSong(url) {
-  const audio = document.getElementById("bgMusic");
-  if (url !== currentSong) {
-    currentSong = url;
-    audio.src = url;
-    audio.play();
-  }
-}
+    }
 
-function createSnowflakes() {
-  const snow = document.querySelector('.snow');
-  for (let i = 0; i < 100; i++) {
-    const snowflake = document.createElement('div');
-    snowflake.classList.add('snowflake');
-    snowflake.innerHTML = '.';
-    snowflake.style.left = Math.random() * 100 + 'vw';
-    snowflake.style.animationDuration = (2 + Math.random() * 3) + 's';
-    snowflake.style.opacity = Math.random();
-    snowflake.style.fontSize = (8 + Math.random() * 10) + 'px';
-    snow.appendChild(snowflake);
-  }
-}
+    // Đổi nhạc theo chọn
+    function changeSong(url) {
+      const audio = document.getElementById("bgMusic");
+      if (url !== currentSong) {
+        currentSong = url;
+        audio.src = url;
+        audio.play();
+      }
+    }
 
-let lastFrame = performance.now();
-let frameCount = 0;
-let fps = 0;
+    // Tuyết rơi
+    function createSnowflakes() {
+      const snow = document.querySelector('.snow');
+      for (let i = 0; i < 100; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        snowflake.innerHTML = '.';
+        snowflake.style.left = Math.random() * 100 + 'vw';
+        snowflake.style.animationDuration = (2 + Math.random() * 3) + 's';
+        snowflake.style.opacity = Math.random();
+        snowflake.style.fontSize = (8 + Math.random() * 10) + 'px';
+        snow.appendChild(snowflake);
+      }
+    }
 
-function updateFPS() {
-  const now = performance.now();
-  frameCount++;
-  if (now - lastFrame >= 1000) {
-    fps = frameCount;
-    frameCount = 0;
-    lastFrame = now;
-    document.getElementById("fps").innerText = "FPS: " + fps;
-  }
-  requestAnimationFrame(updateFPS);
-}
+    // Đo FPS
+    let lastFrame = performance.now();
+    let frameCount = 0;
+    let fps = 0;
 
-setInterval(updateTimer, 1000);
-window.onload = () => {
-  updateTimer();
-  createSnowflakes();
-  updateFPS();
-};
+    function updateFPS() {
+      const now = performance.now();
+      frameCount++;
+      if (now - lastFrame >= 1000) {
+        fps = frameCount;
+        frameCount = 0;
+        lastFrame = now;
+        document.getElementById("fps").innerText = "FPS: " + fps;
+      }
+      requestAnimationFrame(updateFPS);
+    }
 
+    // Khi web load xong thì chạy 3 chức năng chính
+    setInterval(updateTimer, 1000);
+    window.onload = () => {
+      updateTimer();
+      createSnowflakes();
+      updateFPS();
+    };
   </script>
 </head>
+
 <body>
   <div id="fps" class="fps-counter">FPS: 0</div>
   <div class="snow"></div>
+
   <div class="container">
-    <img src="1.jpg" alt="avatar" class="avatar">
-    <h1>LÂM PHÚ QUÝ</h1><span class="verified">✔️</span></h1><div class="social-icons">
-  <a href="lamphuquy04@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
-  <a href="https://t.me/linktele" target="_blank"><i class="fab fa-telegram"></i></a>
-  <a href="https://web.facebook.com/quyhyz" target="_blank"><i class="fab fa-facebook"></i></a>
-  <a href="https://zalo.me/sozalo" target="_blank"><i class="fas fa-comment-dots"></i></a>
-  <a href="https://tiktok.com/@bequy2" target="_blank"><i class="fab fa-tiktok"></i></a>
+    <!-- Đổi ảnh avatar ở đây, thay tên file ở src -->
+    <img src="avatar.jpg" alt="avatar" class="avatar">
+
+    <!-- Đổi tên tại đây -->
+    <h1>LÂM PHÚ QUÝ ✅<h1><span class="verified">️</span></h1>
+
+    <!-- Link mạng xã hội, muốn thêm thì cứ copy <a> rồi đổi link -->
+    <div class="button-container">
+  <button class="button" onclick="location.href = 'tel:+84388838940'">
+    <div class="grid-container">
+    <i class="fa-solid fa-phone"></i> Gọi cho tôi
+    </div>
+  </button>
+
+  <button class="button" onclick="location.href = 'https://www.facebook.com/share/16LhJmELER/'">
+    <div class="grid-container">
+      <i class="fab fa-facebook"></i> Facebook
+    </div>
+  </button>
+
+  <button class="button" onclick="location.href = 'https://www.tiktok.com/@vanh.love.it_11'">
+    <div class="grid-container">
+      <i class="fab fa-tiktok"></i> TikTok
+    </div>
+  </button>
+
+  <button class="button" onclick="location.href = 'https://github.com/zzzaaayyy1234'">
+    <div class="grid-container">
+      <i class="fab fa-github"></i> GitHub
+    </div>
+  </button>
 </div>
 
-<div class="info">
-  BYPASS - OFF ICL<br>
-  FRP - GIẢI MÃ ĐIỆN THOẠI<br>
-  ZALO: <a href="tel:+84" class="zalo">0817813259</a></a>
-</div>
+    <!-- Phần mô tả dịch vụ -->
+    <div class="info">
+      BYPASS - OFF ICL<br>
+      FRP - GIẢI MÃ ĐIỆN THOẠI<br>
+      ZALO: 0388.838.940
+    </div>
 
-<div class="timer">
-  Date created: <span id="timer"></span>
-</div>
+    <!-- Hiển thị thời gian đã tạo web -->
+    <div class="timer">
+      Date created: <span id="timer"></span>
+    </div>
 
-<div class="music-btn">
-  <select onchange="changeSong(this.value)">
-    <option value="">Play Music</option>
-    <option value="./emcuoiroia.mp3">Em Cưới Rồi À Remix</option>
-    <option value="./slayphonk.mp3">Slay Phonk</option>
-    <option value="./thaproitudo.mp3">Tháp Rơi Tự Do Remix</option>
-  </select>
-  <audio id="bgMusic" autoplay loop hidden></audio>
-</div>
+    <!-- Chọn nhạc nền -->
+    <div class="music-btn">
+      <select onchange="changeSong(this.value)">
+        <option value="">Play Music</option>
+        <option value="./emcuoiroia.mp3">Em Cưới Rồi À Remix</option>
+        <option value="./slayphonk.mp3">Slay Phonk</option>
+        <option value="./thaproitudo.mp3">Tháp Rơi Tự Do Remix</option>
+      </select>
+      <audio id="bgMusic" autoplay loop hidden></audio>
+    </div>
 
   </div>
 </body>
