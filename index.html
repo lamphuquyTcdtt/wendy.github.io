@@ -1,264 +1,14 @@
-<!-- HTML COMMENT FORMAT: 
-    - Sửa chỗ nào, tìm class hoặc id tương ứng.
-    - Mỗi chỗ đều có mô tả để người không rành cũng hiểu.
--->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LÂM PHÚ QUÝ</title> <!-- Đổi tiêu đề trang tại đây -->
-  
-  <!-- Font icon và font chữ đẹp cho FPS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: black;
-      color: white;
-      font-family: 'Arial', sans-serif;
-      overflow-x: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lâm Phú Quý</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
 
-    .fps-counter {
-      position: fixed;
-      top: 5px;
-      left: 10px;
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 5px 10px;
-      border-radius: 5px;
-      color: #00ffcc;
-      font-size: 14px;
-      z-index: 9999;
-      font-family: Orbitron; /* Font số FPS */
-    }
-
-    /* Tuyết rơi nền */
-    .snow { 
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 998;
-    }
-
-    .snowflake {
-      position: absolute;
-      top: -10px;
-      color: white;
-      font-size: 10px;
-      animation: fall linear infinite;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
-    }
-
-    .container {
-      max-width: 400px;
-      width: 100%;
-      padding: 20px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .avatar {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 4px solid transparent;
-      background-image: linear-gradient(black, black), 
-      linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet); /* Viền 7 màu */
-      background-origin: border-box;
-      background-clip: content-box, border-box;
-      box-shadow: 0 0 20px lime;
-      animation: borderSpin 5s linear infinite;
-      margin-bottom: 15px;
-      object-fit: cover;
-      aspect-ratio: 1 / 1; /* Tỉ lệ hình vuông */
-    }
-
-    @keyframes borderSpin {
-      0% { filter: hue-rotate(0deg); }
-      100% { filter: hue-rotate(360deg); }
-    }
-
-    h1 {
-      font-size: 22px;
-      margin: 10px 0;
-    }
-
-    .verified {
-      color: #00f0ff;
-      margin-left: 5px;
-    }
-
-    /* Các icon MXH */
-    .button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.button {
-  width: 220px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: block;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-}
-
-.button:hover {
-  background-color: #00f0ff;
-  color: black;
-  box-shadow: 0 0 10px #00f0ff;
-}
-
-.grid-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.button i {
-  font-size: 18px;
-}
-    .info {
-      font-size: 14px;
-      margin: 20px 0;
-      line-height: 1.6;
-    }
-
-    .zalo {
-      color: #00f0ff;
-      text-decoration: none;
-    }
-
-    .timer {
-      color: red;
-      margin-top: 10px;
-    }
-
-    .music-btn {
-      margin-top: 20px;
-    }
-
-    button {
-      background-color: #00f0ff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    select {
-      margin-top: 10px;
-      padding: 8px;
-      border-radius: 5px;
-    }
-
-    /* Responsive cho điện thoại */
-    @media screen and (max-width: 480px) {
-      .avatar {
-        width: 140px;
-        height: 140px;
-      }
-      h1 {
-        font-size: 18px;
-      }
-    }
-
-  </style>
-
-  <script>
-    let currentSong = "";
-    
-    // Đồng hồ hiển thị thời gian tạo web
-    function updateTimer() {
-      const createdAt = new Date("2025-04-21T00:00:00"); // Đổi ngày bắt đầu tại đây
-      const now = new Date();
-      const diff = Math.floor((now - createdAt) / 1000);
-      const days = Math.floor(diff / (3600 * 24));
-      const hours = Math.floor((diff % (3600 * 24)) / 3600);
-      const minutes = Math.floor((diff % 3600) / 60);
-      const seconds = diff % 60;
-      document.getElementById("timer").innerText = `${days} day ${hours} hour ${minutes} minute ${seconds} second`;
-    }
-
-    // Đổi nhạc theo chọn
-    function changeSong(url) {
-      const audio = document.getElementById("bgMusic");
-      if (url !== currentSong) {
-        currentSong = url;
-        audio.src = url;
-        audio.play();
-      }
-    }
-
-    // Tuyết rơi
-    function createSnowflakes() {
-      const snow = document.querySelector('.snow');
-      for (let i = 0; i < 100; i++) {
-        const snowflake = document.createElement('div');
-        snowflake.classList.add('snowflake');
-        snowflake.innerHTML = '.';
-        snowflake.style.left = Math.random() * 100 + 'vw';
-        snowflake.style.animationDuration = (2 + Math.random() * 3) + 's';
-        snowflake.style.opacity = Math.random();
-        snowflake.style.fontSize = (8 + Math.random() * 10) + 'px';
-        snow.appendChild(snowflake);
-      }
-    }
-
-    // Đo FPS
-    let lastFrame = performance.now();
-    let frameCount = 0;
-    let fps = 0;
-
-    function updateFPS() {
-      const now = performance.now();
-      frameCount++;
-      if (now - lastFrame >= 1000) {
-        fps = frameCount;
-        frameCount = 0;
-        lastFrame = now;
-        document.getElementById("fps").innerText = "FPS: " + fps;
-      }
-      requestAnimationFrame(updateFPS);
-    }
-
-    // Khi web load xong thì chạy 3 chức năng chính
-    setInterval(updateTimer, 1000);
-    window.onload = () => {
-      updateTimer();
-      createSnowflakes();
-      updateFPS();
-    };
-  </script>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -266,62 +16,63 @@
   <div class="snow"></div>
 
   <div class="container">
-    <!-- Đổi ảnh avatar ở đây, thay tên file ở src -->
-    <img src="avatar.jpg" alt="avatar" class="avatar">
+    <img src="avatar.jpg" alt="avatar" class="avatar" />
 
-    <!-- Đổi tên tại đây -->
-    <h1>LÂM PHÚ QUÝ ✅<h1><span class="verified">️</span></h1>
+    <div class="name">Lâm Phú Quý <span class="verified">✔</span></div>
 
-    <!-- Link mạng xã hội, muốn thêm thì cứ copy <a> rồi đổi link -->
     <div class="button-container">
-  <button class="button" onclick="location.href = 'tel:+840773280093'">
-    <div class="grid-container">
-    <i class="fa-solid fa-phone"></i> Gọi cho tôi
+      <button class="button" onclick="location.href='tel:+84388838940'">
+        <div class="grid-container"><i class="fa-solid fa-phone"></i> Gọi cho tôi</div>
+      </button>
+      <button class="button" onclick="location.href='https://www.facebook.com/share/16LhJmELER/'">
+        <div class="grid-container"><i class="fab fa-facebook"></i> Facebook</div>
+      </button>
+      <button class="button" onclick="location.href='https://www.tiktok.com/@vanh.love.it_11'">
+        <div class="grid-container"><i class="fab fa-tiktok"></i> TikTok</div>
+      </button>
+      <button class="button" onclick="location.href='https://github.com/zzzaaayyy1234'">
+        <div class="grid-container"><i class="fab fa-github"></i> GitHub</div>
+      </button>
     </div>
-  </button>
 
-  <button class="button" onclick="location.href = 'https://www.facebook.com/share/1673K8qmG5/?mibextid=wwXIfr'">
-    <div class="grid-container">
-      <i class="fab fa-facebook"></i> Facebook
-    </div>
-  </button>
-
-  <button class="button" onclick="location.href = 'https://www.tiktok.com/@bequy2'">
-    <div class="grid-container">
-      <i class="fab fa-tiktok"></i> TikTok
-    </div>
-  </button>
-
-  <button class="button" onclick="location.href = 'https://github.com/zzzaaayyy1234'">
-    <div class="grid-container">
-      <i class="fab fa-github"></i> GitHub
-    </div>
-  </button>
-</div>
-
-    <!-- Phần mô tả dịch vụ -->
     <div class="info">
-      BYPASS - OFF ICL<br>
-      FRP - GIẢI MÃ ĐIỆN THOẠI<br>
-      ZALO: 840773280093
+      BYPASS - OFF ICL<br />
+      FRP - GIẢI MÃ ĐIỆN THOẠI<br />
+      ZALO: 0388.838.940
     </div>
 
-    <!-- Hiển thị thời gian đã tạo web -->
     <div class="timer">
       Date created: <span id="timer"></span>
     </div>
 
-    <!-- Chọn nhạc nền -->
     <div class="music-btn">
       <select onchange="changeSong(this.value)">
         <option value="">Play Music</option>
-        <option value="./emcuoiroia.mp3">Em Cưới Rồi À Remix</option>
-        <option value="./slayphonk.mp3">Slay Phonk</option>
-        <option value="./thaproitudo.mp3">Tháp Rơi Tự Do Remix</option>
+        <option value="./music/deanhluongthien.mp3">Để Anh Lương Thiện Remix</option>
+        <option value="./music/emcuoiroia.mp3">Em Cưới Rồi À Remix</option>
+        <option value="./music/slayphonk.mp3">Slay Phonk</option>
+        <option value="./music/freemanxlow.mp3">Free Man x Low</option>
+        <option value="./music/thaproitudo.mp3">Tháp Rơi Tự Do Remix</option>
       </select>
       <audio id="bgMusic" autoplay loop hidden></audio>
     </div>
-
   </div>
+    <hr class="divider">
+
+<div class="app-section">
+  <h2>Các Ứng Dụng Của Tao</h2>
+  <div class="app-grid">
+    <a href="https://apps.apple.com/vn/app/devil-may-cry-peak-of-combat/id6449589065?l=vi" class="app-card" target="_blank">
+      <img src="./avtapp/app1.jpg" alt="App 1">
+      <span>Devil May Cry: Peak of Combat</span>
+    </a>
+    <a href="https://apps.apple.com/vn/app/spectra-music-visualizer/id1505140281?l=vi" class="app-card" target="_blank">
+      <img src="./avtapp/app2.jpg" alt="App 2">
+      <span>Spectra - Music Visualizer</span>
+    </a>
+    <!-- Thêm nữa ở đây -->
+  </div>
+</div>
+  <script src="script.js"></script>
 </body>
 </html>
