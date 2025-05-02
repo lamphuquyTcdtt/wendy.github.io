@@ -1,78 +1,100 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lâm Phú Quý</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình phát nhạc</title>
+    <style>
+        body {
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .player {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(30, 30, 30, 0.8);
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+            width: 320px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none;
+        }
+        li {
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            background: #333;
+            margin-top: 5px;
+            text-align: left;
+        }
+        li:hover, .playing {
+            background: #555;
+        }
+        button {
+            background: #6200ea;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #3700b3;
+        }
+    </style>
 </head>
-
 <body>
-  <div id="fps" class="fps-counter">FPS: 0</div>
-  <div class="snow"></div>
-
-  <div class="container">
-    <img src="1.jpg" alt="avatar" class="avatar" />
-
-    <div class="name">Lâm Phú Quý <span class="verified">✔</span></div>
-
-    <div class="button-container">
-      <button class="button" onclick="location.href='tel:+84388838940'">
-        <div class="grid-container"><i class="fa-solid fa-phone"></i> Gọi cho tôi</div>
-      </button>
-      <button class="button" onclick="location.href='https://www.facebook.com/share/1YRJkk2Ha3/?mibextid=wwXIfr'">
-        <div class="grid-container"><i class="fab fa-facebook"></i> Facebook</div>
-      </button>
-      <button class="button" onclick="location.href='https://www.tiktok.com/@bequy2'">
-        <div class="grid-container"><i class="fab fa-tiktok"></i> TikTok</div>
-      </button>
-      <button class="button" onclick="location.href='https://github.com/'">
-        <div class="grid-container"><i class="fab fa-github"></i> GitHub</div>
-      </button>
+    <div class="player">
+        <h2>Chọn bài hát tâm trạng hôm nay</h2>
+        <button id="togglePlaylist">Chọn bài hát</button>
+        <ul id="playlist"></ul>
+        <audio id="audioPlayer" controls style="margin-top: 15px; width: 100%;"></audio>
     </div>
 
-    <div class="info">
-      BYPASS - OFF ICL<br />
-      FRP - GIẢI MÃ ĐIỆN THOẠI<br />
-      ZALO: 0773.280.93
-    </div>
+    <script>
+        const playlist = document.getElementById('playlist');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const toggleButton = document.getElementById('togglePlaylist');
+        const tracks = [
+            { name: "Âm Thầm Bên Em", url: "music/amthambenem.mp3" },
+            { name: "Bình Yên", url: "music/binhyen.mp3" },
+            { name: "Mất Kết Nối", url: "music/matketnoi.mp3" },
+            { name: "Thay Tôi Yêu Cô Ấy", url: "music/thaytoiyeucoay.mp3" },
+            { name: "Trả Cho Em", url: "music/trachoem.mp3" }
+        ];
 
-    <div class="timer">
-      Date created: <span id="timer"></span>
-    </div>
+        tracks.forEach((track, index) => {
+            const li = document.createElement('li');
+            li.textContent = track.name;
+            li.dataset.index = index;
+            li.addEventListener('click', () => playTrack(index));
+            playlist.appendChild(li);
+        });
 
-    <div class="music-btn">
-      <select onchange="changeSong(this.value)">
-        <option value="">Play Music</option>
-        <option value="./music/deanhluongthien.mp3">Để Anh Lương Thiện Remix</option>
-        <option value="./music/emcuoiroia.mp3">Em Cưới Rồi À Remix</option>
-        <option value="./music/slayphonk.mp3">Slay Phonk</option>
-        <option value="./music/freemanxlow.mp3">Free Man x Low</option>
-        <option value="./music/thaproitudo.mp3">Tháp Rơi Tự Do Remix</option>
-      </select>
-      <audio id="bgMusic" autoplay loop hidden></audio>
-    </div>
-  </div>
-    <hr class="divider">
+        toggleButton.addEventListener('click', () => {
+            playlist.style.display = playlist.style.display === 'none' ? 'block' : 'none';
+        });
 
-<div class="app-section">
-  <h2>Các Ứng Dụng Của Tao</h2>
-  <div class="app-grid">
-    <a href="https://apps.apple.com/vn/app/devil-may-cry-peak-of-combat/id6449589065?l=vi" class="app-card" target="_blank">
-      <img src="./avtapp/app1.jpg" alt="App 1">
-      <span>Devil May Cry: Peak of Combat</span>
-    </a>
-    <a href="https://apps.apple.com/vn/app/spectra-music-visualizer/id1505140281?l=vi" class="app-card" target="_blank">
-      <img src="./avtapp/app2.jpg" alt="App 2">
-      <span>Spectra - Music Visualizer</span>
-    </a>
-    <!-- Thêm nữa ở đây -->
-  </div>
-</div>
-  <script src="script.js"></script>
+        function playTrack(index) {
+            audioPlayer.src = tracks[index].url;
+            audioPlayer.play();
+            document.querySelectorAll('#playlist li').forEach(li => li.classList.remove('playing'));
+            playlist.children[index].classList.add('playing');
+        }
+    </script>
 </body>
 </html>
