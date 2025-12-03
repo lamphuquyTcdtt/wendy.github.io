@@ -1,34 +1,86 @@
-
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Photo Editor - Japan Aesthetics</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-      body {
-        font-family: 'Noto Sans JP', sans-serif;
-      }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.22.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lâm Phú Quý</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
 </head>
-  <body class="bg-gray-100 dark:bg-gray-900">
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+
+<body>
+  <div id="fps" class="fps-counter">FPS: 0</div>
+  <div class="snow"></div>
+
+  <div class="container">
+    <img src="avatar.jpg" alt="avatar1" class="avatar" />
+
+    <div class="name">Lâm Phú Quý  <span class="verified">✔</span></div>
+
+    <div class="button-container">
+      <button class="button" onclick="location.href='tel:+84388838940'">
+        <div class="grid-container"><i class="fa-solid fa-phone"></i> Gọi cho tôi</div>
+      </button>
+      <button class="button" onclick="location.href='https://www.facebook.com/share/16LhJmELER/'">
+        <div class="grid-container"><i class="fab fa-facebook"></i> Facebook</div>
+      </button>
+      <button class="button" onclick="location.href='https://www.tiktok.com/@vanh.love.it_11'">
+        <div class="grid-container"><i class="fab fa-tiktok"></i> TikTok</div>
+      </button>
+      <button class="button" onclick="location.href='https://github.com/zzzaaayyy1234'">
+        <div class="grid-container"><i class="fab fa-github"></i> GitHub</div>
+      </button>
+    </div>
+
+    <div class="info">
+      THIẾT KẾ WEBSITE THEO YÊU CẦU<br>
+      CHUẨN SEO, CHUẨN UX/UI<br>
+      BẢO HÀNH ĐẾN KHI SẬP GOOGLE<br>
+      ZALO: 0817813259
+    </div>
+
+    <div class="timer">
+      Date created: <span id="timer"></span>
+    </div>
+
+    <div class="music-btn">
+      <select onchange="changeSong(this.value)">
+        <option value="">Play Music</option>
+        <option value="./music/deanhluongthien.mp3">Để Anh Lương Thiện Remix</option>
+        <option value="./music/emcuoiroia.mp3">Em Cưới Rồi À Remix</option>
+               <option value="./music/passobemsolto.mp3">ALTXS - PASSO BEM SOLTO</option>
+        <option value="./music/slayphonk.mp3">Slay Phonk</option>
+        <option value="./music/thaproitudo.mp3">Tháp Rơi Tự Do Remix</option>
+      </select>
+      <audio id="bgMusic" autoplay loop hidden></audio>
+    </div>
+  </div>
+    <hr class="divider">
+
+<div class="app-section">
+  <h2>Các Ứng Dụng Của Tao</h2>
+  <div class="app-grid">
+    <a href="https://tranvietanh.netlify.app/" class="app-card" target="_blank">
+      <img src="./avtapp/app1.jpg" alt="App 1">
+      <span>Hack Map LQ X64 Ko Tách Gốc</span>
+    </a>
+    <a href="" class="app-card" target="_blank">
+      <img src="./avtapp/app2.jpg" alt="App 2">
+      <span>Hack Map LQ X64 Tách Gốc</span>
+    </a>
+    <a href="" class="app-card" target="_blank">
+      <img src="./avtapp/getkey.jpg" alt="Get Key">
+      <span>Lấy Key Ở Đây</span>
+    </a>
+    <a href="" class="app-card" target="_blank">
+        <img src="./avtapp/app3.jpg" alt="App 3">
+        <span>vision ai</span>
+    </a><!-- Thêm nữa ở đây -->
+  </div>
+</div>
+  <script src="script.js"></script>
+</body>
 </html>
