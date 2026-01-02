@@ -1,0 +1,93 @@
+HƯỚNG DẪN SỬ DỤNG WEBSITE (BẢN TĨNH)
+
+1) CẤU TRÚC FILE CẦN CÓ
+Trong thư mục website cần có tối thiểu:
+- index.html
+- style.css
+- script.js
+- avatar.jpg  (ảnh đại diện)
+- favicon.ico (icon trình duyệt, có thể bỏ nếu không cần)
+- m.mp3       (nhạc nền)
+
+Nếu thiếu 1 trong các file trên, website có thể không hiển thị đúng hoặc không chạy nhạc.
+
+------------------------------------------------------------
+
+2) CÁCH MỞ WEBSITE ĐÚNG CÁCH (QUAN TRỌNG)
+- Mở file index.html bằng trình duyệt (Chrome/Edge).
+- Nếu mở bằng iPhone/Safari mà lỗi nhạc thì thử Chrome trên điện thoại.
+
+Lưu ý: Trình duyệt hiện nay CHẶN tự phát nhạc.
+Vì vậy nhạc chỉ chạy khi bạn bấm vào nút "Bật nhạc" trên web.
+
+------------------------------------------------------------
+
+3) CÁCH DÙNG NÚT NHẠC (3 TRẠNG THÁI)
+Trên web có 1 nút chữ:
+- "Bật nhạc": Nhấn để bắt đầu phát nhạc
+- "Đang phát...": Nhạc đang được load (đợi 1-2 giây)
+- "Tắt nhạc": Nhạc đang phát, nhấn để tắt
+
+Nếu bấm "Bật nhạc" mà nhạc không chạy:
+- Kiểm tra file m.mp3 có tồn tại đúng tên không
+- Kiểm tra m.mp3 có nằm cùng thư mục với index.html không
+
+------------------------------------------------------------
+
+4) CHỈNH ẢNH ĐẠI DIỆN
+- Thay file avatar.jpg bằng ảnh mới.
+- Giữ đúng tên là: avatar.jpg
+- Nếu ảnh là .png hoặc tên khác, cần sửa trong index.html:
+  Tìm dòng: <img src="avatar.jpg" ...>
+  Đổi thành đúng tên ảnh mới.
+
+------------------------------------------------------------
+
+5) CHỈNH LINK NÚT (GỌI / FACEBOOK / TIKTOK / GITHUB)
+Mở file index.html bằng Notepad/VS Code.
+Tìm các dòng dạng:
+onclick="location.href='...'"
+Rồi thay link bên trong dấu ' ' theo nhu cầu.
+
+Ví dụ:
+- Số điện thoại: tel:+84xxxxxxxxx
+- Facebook: https://facebook.com/...
+- TikTok: https://tiktok.com/@...
+
+------------------------------------------------------------
+
+6) CHỈNH 2 LINK SẢN PHẨM/DEMO (AI STUDIO)
+Trong index.html, tìm đoạn:
+<div class="link-section"> ... </div>
+Thay link trong href="...".
+Có thể đổi tên hiển thị:
+AI Studio App #1 / AI Studio App #2
+thành "Demo 1" / "Demo 2" hoặc tên khác.
+
+------------------------------------------------------------
+
+7) CHỈNH NHẠC NỀN
+- File nhạc đang dùng: m.mp3
+- Muốn đổi nhạc: thay file m.mp3 bằng bài mới (giữ đúng tên m.mp3).
+Hoặc nếu muốn giữ tên khác, sửa index.html:
+<source src="./m.mp3" ...>
+đổi thành:
+<source src="./tenbai.mp3" ...>
+
+Lưu ý: Nên dùng mp3 để dễ chạy trên nhiều trình duyệt.
+
+------------------------------------------------------------
+
+8) UP WEBSITE LÊN HOSTING
+Có thể up lên Netlify / Vercel / GitHub Pages.
+Chỉ cần upload toàn bộ folder website (đủ file như mục 1).
+
+Nếu up lên hosting mà mất nhạc:
+- Kiểm tra hosting có upload kèm file m.mp3 hay không
+- Kiểm tra đúng đường dẫn (./m.mp3)
+
+------------------------------------------------------------
+
+9) HỖ TRỢ
+Nếu cần chỉnh sửa thêm nội dung, đổi bố cục, thêm nút/link, đổi màu giao diện...
+Vui lòng gửi yêu cầu cụ thể để cập nhật.

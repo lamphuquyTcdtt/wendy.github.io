@@ -1,8 +1,9 @@
 let currentSong = null;
+let isPlaying = false;
+let isLoading = false;
 
-// Đếm thời gian từ ngày tạo
 function updateTimer() {
-  const createdAt = new Date("2025-04-21T00:00:00");
+  const createdAt = new Date("2026-01-01T00:00:00");
   const now = new Date();
   const diff = Math.floor((now - createdAt) / 1000);
   const d = Math.floor(diff / 86400);
@@ -14,17 +15,30 @@ function updateTimer() {
     `${d} day ${pad(h)} hour ${pad(m)} minute ${pad(s)} second`;
 }
 
-// Đổi nhạc nếu khác bài hiện tại
-function changeSong(url) {
-  if (url !== currentSong) {
-    currentSong = url;
-    const audio = document.getElementById("bgMusic");
-    audio.src = url;
-    audio.play();
+function toggleMusic() {
+  const audio = document.getElementById("bgMusic");
+  const text = document.getElementById("musicToggle");
+
+  if (isLoading) return;
+
+  if (!isPlaying) {
+    isLoading = true;
+    text.innerText = "Đang phát...";
+    audio.play().then(() => {
+      isPlaying = true;
+      isLoading = false;
+      text.innerText = "Tắt nhạc";
+    }).catch(() => {
+      isLoading = false;
+      text.innerText = "Bật nhạc";
+    });
+  } else {
+    audio.pause();
+    isPlaying = false;
+    text.innerText = "Bật nhạc";
   }
 }
 
-// Tạo hiệu ứng tuyết rơi nhẹ nhàng
 function createSnowflakes(count = 50) {
   const snowContainer = document.querySelector(".snow");
   for (let i = 0; i < count; i++) {
@@ -42,7 +56,6 @@ function createSnowflakes(count = 50) {
   }
 }
 
-// Hiển thị FPS thật mượt
 function monitorFPS() {
   let last = performance.now(), frames = 0;
 
@@ -60,10 +73,9 @@ function monitorFPS() {
   requestAnimationFrame(loop);
 }
 
-// Bắt đầu khi web load
 window.addEventListener("load", () => {
   updateTimer();
   createSnowflakes();
   monitorFPS();
-  setInterval(updateTimer, 1000); // cần giữ để update mỗi giây
+  setInterval(updateTimer, 1000);
 });
