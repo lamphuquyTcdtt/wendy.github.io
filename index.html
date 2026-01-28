@@ -1,73 +1,197 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lâm Phú Quý</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio Link - Premium Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --accent-color: #00d2ff;
+        }
 
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
 
-  <link rel="stylesheet" href="style.css" />
+        body {
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Music Button */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .rotating { animation: rotate 3s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* Main Card */
+        .bio-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 40px 25px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Avatar Styling */
+        .avatar-wrapper {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 20px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover; /* Giữ tỉ lệ ảnh không bị móp */
+            border: 3px solid var(--accent-color);
+            padding: 4px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .verified-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: #1DA1F2;
+            color: white;
+            border-radius: 50%;
+            width: 26px; height: 26px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 13px;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        h1 { color: #fff; font-size: 1.6rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .subtitle { color: #00d2ff; font-size: 0.85rem; margin-bottom: 30px; font-weight: 600; letter-spacing: 2px; }
+
+        /* Links */
+        .links-stack { display: flex; flex-direction: column; gap: 15px; }
+
+        .link-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .link-btn i { width: 30px; font-size: 1.2rem; margin-right: 15px; text-align: center; }
+
+        .link-btn:hover {
+            background: #fff;
+            color: #203a43;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        footer { margin-top: 40px; color: rgba(255,255,255,0.4); font-size: 0.65rem; letter-spacing: 2px; }
+    </style>
 </head>
-
 <body>
-  <div id="fps" class="fps-counter">FPS: 0</div>
-  <div class="snow"></div>
 
-  <div class="container">
-    <img src="avatar.jpg" alt="avatar" class="avatar" />
-
-    <div class="name">Lâm Phú Quý <span class="verified">✔</span></div>
-
-    <div class="button-container">
-      <button class="button" onclick="location.href='tel:+84388838940'">
-        <div class="grid-container"><i class="fa-solid fa-phone"></i> Gọi cho tôi</div>
-      </button>
-
-      <button class="button" onclick="location.href='https://www.facebook.com/share/16LhJmELER/'">
-        <div class="grid-container"><i class="fab fa-facebook"></i> Facebook</div>
-      </button>
-
-      <button class="button" onclick="location.href='https://www.tiktok.com/@vanh.love.it_11'">
-        <div class="grid-container"><i class="fab fa-tiktok"></i> TikTok</div>
-      </button>
-
-      <button class="button" onclick="location.href='https://github.com/zzzaaayyy1234'">
-        <div class="grid-container"><i class="fab fa-github"></i> GitHub</div>
-      </button>
-    </div>
-
-    <div class="link-section">
-      <a href="https://ai.studio/apps/drive/1iL8_mpRTkiZwO_kwm_x7A7SSlF_UqXh4" target="_blank" class="link-item">
-        AI Studio App #1
-      </a>
-      <a href="https://ai.studio/apps/drive/1OKoZYw9QAc3Yh4Lv-37eFzO8B_w3Do77" target="_blank" class="link-item">
-        AI Studio App #2
-      </a>
-    </div>
-
-    <div class="info">
-      THIẾT KẾ WEBSITE THEO YÊU CẦU<br>
-      CHUẨN SEO, CHUẨN UX/UI<br>
-      BẢO HÀNH ĐẾN KHI SẬP GOOGLE<br>
-      ZALO: 0388.838.940
-    </div>
-
-    <div class="timer">
-      Date created: <span id="timer"></span>
-    </div>
-
-    <div class="music-text-wrap">
-      <span id="musicToggle" class="music-text" onclick="toggleMusic()">Bật nhạc</span>
-    </div>
-
-    <audio id="bgMusic" preload="auto">
-      <source src="./m.mp3" type="audio/mpeg" />
+    <audio id="bg-music" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-ukulele.mp3" type="audio/mpeg">
     </audio>
-  </div>
 
-  <script src="script.js"></script>
+    <div class="music-control" id="music-btn">
+        <i class="fas fa-music" id="music-icon"></i>
+    </div>
+
+    <div class="bio-card">
+        <div class="avatar-wrapper">
+            <img src="https://sf-static.upanhlaylink.com/img/image_202601284695cafa6bedc3848a112e8f04f05347.jpg" alt="Avatar" class="profile-img">
+            <div class="verified-badge"><i class="fas fa-check"></i></div>
+        </div>
+        
+        <h1>LÂM PHÚ QUÝ</h1>
+        <p class="subtitle">CREATIVE & MINIMALIST</p>
+
+        <div class="links-stack">
+            <a href="https://www.facebook.com/share/1ArmaHG85s/?mibextid=wwXIfr" class="link-btn" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+                <span>Facebook Cá Nhân</span>
+            </a>
+
+            <a href="#" class="link-btn">
+                <i class="fab fa-tiktok"></i>
+                <span>Kênh TikTok</span>
+            </a>
+
+            <a href="#" class="link-btn">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram Feed</span>
+            </a>
+
+            <a href="mailto:contact@yourdomain.com" class="link-btn">
+                <i class="fas fa-envelope"></i>
+                <span>Liên Hệ Công Việc</span>
+            </a>
+        </div>
+
+        <footer>© 2026 DESIGN BY GEMINI</footer>
+    </div>
+
+    <script>
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+        const musicIcon = document.getElementById('music-icon');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                music.pause();
+                musicIcon.classList.remove('rotating');
+                musicIcon.classList.replace('fa-pause', 'fa-music');
+            } else {
+                music.play();
+                musicIcon.classList.add('rotating');
+                musicIcon.classList.replace('fa-music', 'fa-pause');
+            }
+            isPlaying = !isPlaying;
+        });
+    </script>
+
 </body>
 </html>
